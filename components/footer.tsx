@@ -49,18 +49,24 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Contact Info */}
+        {/* Contact Information */}
         <div>
           <h3 className="text-xl font-bold text-white mb-4">Contact Us</h3>
           <div className="space-y-3">
-            <div className="flex items-center gap-2 text-gray-400">
+            <a 
+              href="mailto:adityarn37@gmail.com"
+              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+            >
               <Mail className="w-4 h-4" />
-              <span>support@wedspace.com</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-400">
+              <span>adityarn37@gmail.com</span>
+            </a>
+            <a 
+              href="tel:+919599441448"
+              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+            >
               <Phone className="w-4 h-4" />
-              <span>+1 (555) 123-4567</span>
-            </div>
+              <span>+91 9599441448</span>
+            </a>
           </div>
         </div>
       </div>

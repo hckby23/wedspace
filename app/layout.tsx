@@ -100,8 +100,8 @@ export default function RootLayout({
         <CartProvider>
           <Header />
           {/* Main Content */}
-          <main className="pt-16 md:pt-24 container mx-auto p-4 md:p-6 lg:p-12">
-            <div className="max-w-5xl mx-auto">
+          <main className="pt-20 md:pt-28 flex-grow">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8">
               {children}
             </div>
           </main>
