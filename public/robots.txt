@@ -1,0 +1,45 @@
+
+# wedspace robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://wedspace.com/sitemap.xml
+
+# Disallow admin and private routes
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /settings/
+Disallow: /private/
+Disallow: /vendor/dashboard/
+Disallow: /venue/dashboard/
+
+# Allow major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /venues
+Allow: /vendors
+Allow: /real-weddings
+Allow: /ideas
+Allow: /about
+Allow: /contact
+Allow: /vendor/signup
+Allow: /venue/signup
+
+User-agent: Bingbot
+Allow: /
+Allow: /venues
+Allow: /vendors
+Allow: /real-weddings
+Allow: /ideas
+Allow: /about
+Allow: /contact
+Allow: /vendor/signup
+Allow: /venue/signup
+
+# Allow social media crawlers
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
