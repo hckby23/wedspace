@@ -6,12 +6,13 @@ import { Mail, Instagram, ArrowLeft, Phone } from 'lucide-react';
 
 const ContactPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-      <div className="absolute top-8 left-8">
-        <Logo className="text-4xl" />
-      </div>
-      <div className="bg-card p-8 md:p-12 rounded-lg shadow-xl max-w-lg w-full text-center">
-        <h1 className="text-4xl font-display font-bold text-text-primary mb-8">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 pt-12 sm:pt-4">
+      {/* Logo is now part of the card content below */}
+      <div className="bg-card p-6 md:p-12 rounded-lg shadow-xl max-w-lg w-full text-center">
+        <div className="flex justify-center mb-6 md:mb-8">
+          <Logo className="text-5xl sm:text-6xl" /> {/* Adjusted logo size */}
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-display font-bold text-text-primary mb-6 md:mb-8">
           Contact Us
         </h1>
         <p className="text-text-secondary md:text-lg mb-8">
