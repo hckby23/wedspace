@@ -1,0 +1,99 @@
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
+
+@layer base {
+  :root {
+    /* WedSpace Aligned shadcn/ui Theme Variables */
+    --background: 0 0% 100%; /* White */
+    --foreground: 240 10% 3.9%; /* Default dark text (shadcn) */
+
+    --primary: 0 70% 50%;        /* Darker RED: hsl(0, 70%, 50%) approx #b31212 */
+    --primary-foreground: 0 0% 98%; /* White text on primary */
+
+    --secondary: 39 100% 50%;   /* AMBER: hsl(39, 100%, 50%) approx #ffbf00 */
+    --secondary-foreground: 20 100% 10%; /* Dark Brown text on secondary */
+    
+    --accent: 25 83% 91%;         /* WedSpace Light Peach: hsl(25, 83%, 91%) approx #FDE2D2 */
+    --accent-foreground: 0 70% 50%; /* Darker RED text on accent */
+
+    --card: 0 0% 100%;             /* White */
+    --card-foreground: 240 10% 3.9%; /* Default dark text */
+
+    --popover: 0 0% 100%;          /* White */
+    --popover-foreground: 240 10% 3.9%; /* Default dark text */
+
+    --border: 240 5.9% 90%;       /* Light grey border (shadcn default) */
+    --input: 240 5.9% 90%;        /* Light grey input bg (shadcn default) */
+    --ring: 0 70% 50%;           /* Darker RED for focus rings */
+
+    --muted: 240 4.8% 95.9%;      /* Lighter grey (shadcn default) */
+    --muted-foreground: 240 3.8% 46.1%; /* Medium grey text on muted (shadcn default) */
+
+    --destructive: 0 84.2% 60.2%; /* Default destructive red (shadcn) */
+    --destructive-foreground: 0 0% 98%; /* White text on destructive */
+
+    --radius: 0.5rem; /* Default from shadcn, aligns with our previous setting */
+
+    /* Custom WedSpace Variables (not directly used by shadcn components but by our layout) */
+    --text-primary: 20 100% 20%;      /* #333333 - Dark charcoal for headings (custom HSL) */
+    --text-secondary: 20 100% 33.3%;  /* #555555 - Medium grey for body text (custom HSL) */
+    --hero-gradient-from: 10 100% 98%; /* #FFF7F5 - Pale pinkish-peach */
+    --hero-gradient-to: 40 100% 97%;   /* #FFFBF2 - Pale yellowish-off-white */
+  }
+
+  .dark {
+    /* WedSpace Aligned Dark Theme (example, can be refined) */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --primary: 0 60% 45%;        /* Darker RED (Dark Mode): hsl(0, 60%, 45%) */
+    --primary-foreground: 0 0% 98%; /* White text on primary */
+
+    --secondary: 39 80% 45%;     /* AMBER (Dark Mode) */
+    --secondary-foreground: 20 100% 10%; /* Dark Brown text on secondary */
+    
+    --accent: 25 50% 20%;         /* Darker Peach/Brown for Accent in Dark Mode */
+    --accent-foreground: 0 60% 45%; /* Darker RED text on accent (Dark Mode) */
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 0 60% 45%;           /* Darker RED for focus rings (Dark Mode) */ 
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Custom WedSpace Dark Variables */
+    --text-primary: 0 0% 90%;
+    --text-secondary: 0 0% 70%;
+    --hero-gradient-from: 10 30% 15%;
+    --hero-gradient-to: 40 30% 12%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    /* Use text-foreground (general dark text) from shadcn by default */
+    /* Specific text lightness can be applied with text-text-secondary where needed */
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-text-primary;
+    /* Uses our custom darker heading color */
+  }
+}
+
