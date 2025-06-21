@@ -30,8 +30,8 @@ const HeroSection = () => {
             <Logo size="xl" />
           </div>
           
-          {/* Main Heading with Gradient Text */}
-          <h1 className="font-playfair text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+          {/* Main Heading with Gradient Text (responsive, static, more readable on mobile) */}
+          <h1 className="font-montserrat text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight">
             <span className="block bg-gradient-to-r from-rose-600 via-pink-500 to-amber-500 bg-clip-text text-transparent">
               Big Dreams.
             </span>

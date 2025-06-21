@@ -48,10 +48,18 @@ const JoinFamilySection = () => {
         </div>
 
         {/* Heading */}
-        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mb-6 flex items-center justify-center gap-4">
-          <span className="text-gray-800">Join the</span>
-          <Logo size="lg" />
-          <span className="text-gray-800">Family</span>
+        {/* Mobile: "Join wedspace"; Desktop: "Join the [Logo] Family" */}
+        <h2 className="font-playfair font-bold mb-6 flex items-center justify-center gap-2 sm:gap-4">
+          {/* Mobile only */}
+          <span className="block sm:hidden text-3xl leading-tight">
+            Join <span className="align-middle inline-block"><Logo size="md" className="inline-block align-middle" /></span>
+          </span>
+          {/* Desktop and up */}
+          <span className="hidden sm:flex items-center gap-4 text-4xl md:text-5xl">
+            <span className="text-gray-800">Join the</span>
+            <Logo size="lg" />
+            <span className="text-gray-800">Family</span>
+          </span>
         </h2>
 
         {/* Description */}

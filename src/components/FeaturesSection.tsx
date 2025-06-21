@@ -66,9 +66,19 @@ const FeaturesSection = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Main Features */}
         <div className="text-center mb-16">
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 flex items-center justify-center gap-4">
-            <span className="text-gray-800">Why Couples Choose</span>
-            <Logo size="lg" />
+          {/* Mobile: stacked 'Why', 'choose', '[Logo]'; Desktop: 'Why Couples Choose [Logo]' */}
+          <h2 className="font-playfair font-bold mb-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+            {/* Mobile only */}
+            <span className="flex flex-col sm:hidden text-3xl leading-tight items-center">
+              <span>Why</span>
+              <span>choose</span>
+              <span className="mt-1"><Logo size="md" /></span>
+            </span>
+            {/* Desktop and up */}
+            <span className="hidden sm:flex items-center gap-4 text-4xl md:text-5xl">
+              <span className="text-gray-800">Why Couples Choose</span>
+              <Logo size="lg" />
+            </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-rose-500 to-amber-500 mx-auto mb-12 rounded-full"></div>
         </div>
