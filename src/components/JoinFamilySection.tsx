@@ -49,10 +49,11 @@ const JoinFamilySection = () => {
 
         {/* Heading */}
         {/* Mobile: "Join wedspace"; Desktop: "Join the [Logo] Family" */}
-        <h2 className="font-playfair font-bold mb-6 flex items-center justify-center gap-2 sm:gap-4">
-          {/* Mobile only */}
-          <span className="block sm:hidden text-3xl leading-tight">
-            Join <span className="align-middle inline-block"><Logo size="md" className="inline-block align-middle" /></span>
+        <h2 className="font-playfair font-bold mb-6 flex flex-col items-center justify-center gap-2 sm:gap-4">
+          {/* Mobile only: Stack 'Join' above 'wedspace' */}
+          <span className="block sm:hidden text-3xl leading-tight flex flex-col items-center">
+            <span>Join</span>
+            <span className="align-middle inline-block mt-1"><Logo size="md" className="inline-block align-middle" /></span>
           </span>
           {/* Desktop and up */}
           <span className="hidden sm:flex items-center gap-4 text-4xl md:text-5xl">
