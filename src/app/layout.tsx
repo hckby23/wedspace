@@ -1,6 +1,7 @@
 import React from 'react';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+import { Analytics } from '@vercel/analytics/react';
 import '../styles/globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -37,6 +38,7 @@ export default function RootLayout({
                 <Footer />
               </div>
               <DemoBanner />
+              <Analytics />
             </AuthProvider>
           </ThemeProvider>
         </QueryProvider>
