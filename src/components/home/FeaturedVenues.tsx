@@ -1,9 +1,10 @@
+"use client";
 
 import React from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { FEATURED_VENUES } from '@/data/venues';
 
 const FeaturedVenues: React.FC = () => {
@@ -24,7 +25,7 @@ const FeaturedVenues: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {displayVenues.map((venue) => (
-            <Link to={`/venues/${venue.id}`} key={venue.id}>
+            <Link href={`/venues/${venue.id}`} key={venue.id}>
               <Card className="overflow-hidden card-hover h-full">
                 <div className="relative h-48">
                   <img
@@ -56,7 +57,7 @@ const FeaturedVenues: React.FC = () => {
         </div>
         
         <div className="mt-10 text-center">
-          <Link to="/venues">
+          <Link href="/venues">
             <Button variant="outline" className="border-wed text-wed hover:bg-wed/5">
               View All Venues in Delhi NCR
             </Button>

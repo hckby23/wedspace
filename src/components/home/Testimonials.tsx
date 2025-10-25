@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -45,7 +44,7 @@ const Testimonials: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-white/80 backdrop-blur border-none shadow-md overflow-hidden">
+            <Card key={index} className="bg-[var(--bg-card)] backdrop-blur border-none shadow-md overflow-hidden text-[var(--text)]">
               <CardContent className="p-6">
                 <div className="flex justify-center mb-6">
                   <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
@@ -57,11 +56,11 @@ const Testimonials: React.FC = () => {
                   </div>
                 </div>
                 <blockquote className="text-center mb-4">
-                  <p className="italic text-gray-700">"{testimonial.quote}"</p>
+                  <p className="italic text-[var(--text-muted)]">"{testimonial.quote}"</p>
                 </blockquote>
                 <div className="text-center">
                   <p className="font-playfair font-semibold">{testimonial.author}</p>
-                  <p className="text-gray-500 text-sm">{testimonial.location}</p>
+                  <p className="text-[var(--text-muted)] text-sm">{testimonial.location}</p>
                 </div>
               </CardContent>
             </Card>

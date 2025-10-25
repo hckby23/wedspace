@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, Map, Calendar, X } from 'lucide-react';
@@ -11,12 +13,14 @@ import {
   CommandItem,
   CommandList
 } from "@/components/ui/command";
-import { toast } from 'sonner';
+// Removed toast import - using window.alert for consistency
 
 interface SearchBarProps {
   variant?: 'default' | 'hero';
   initialQuery?: string;
   className?: string;
+  placeholder?: string;
+  placeholderSuggestions?: string[];
   onSearch?: (query: string) => void | Promise<void>;
 }
 
@@ -24,18 +28,25 @@ const SearchBar: React.FC<SearchBarProps> = ({
   variant = 'default',
   initialQuery = '',
   className = '',
+  placeholder = 'Search venues, vendors, or resources...',
+  placeholderSuggestions,
   onSearch
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchType, setSearchType] = useState<'all' | 'venues' | 'vendors'>('all');
+  const marqueeSuggestions = placeholderSuggestions?.filter(Boolean) ?? [];
+  const marqueeText = marqueeSuggestions.length > 0
+    ? `${marqueeSuggestions.join('   •   ')}   •   ${marqueeSuggestions.join('   •   ')}`
+    : '';
+  const marqueeDuration = Math.max(12, marqueeSuggestions.length * 6);
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!searchQuery.trim()) {
-      toast.error("Please enter a search term");
+      if (typeof window !== 'undefined') window.alert("Please enter a search term");
       return;
     }
     
@@ -47,10 +58,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
       onSearch(searchQuery);
     } else {
       // Otherwise use the default behavior
-      toast.success(`Searching for ${searchQuery}`);
-      
-      // Redirect to search results page
-      navigate(`/search?q=${encodeURIComponent(searchQuery)}&type=${searchType}`);
+      if (typeof window !== 'undefined') window.alert(`Searching for ${searchQuery}`);
+      if (typeof window !== 'undefined') window.alert(`Searching for venues: ${searchQuery}`);
+      router.push(`/venues?search=${encodeURIComponent(searchQuery)}`);
+      setIsModalOpen(false);
     }
   };
   
@@ -79,13 +90,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <div className="relative w-full">
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
           <Input
-            placeholder="Search venues, vendors, or resources..."
+            placeholder={marqueeSuggestions.length ? ' ' : placeholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             onFocus={() => setIsModalOpen(true)}
             className={`pl-9 pr-9 py-2 ${variant === 'hero' ? 'h-12 text-base rounded-l-lg rounded-r-none border-r-0' : 'rounded-l-md rounded-r-none border-r-0'}`}
           />
+          {!searchQuery && marqueeSuggestions.length > 0 && (
+            <div className="pointer-events-none absolute inset-0 flex items-center pl-9 pr-3 overflow-hidden">
+              <div className="marquee-track whitespace-nowrap text-gray-400 dark:text-gray-500" aria-hidden="true">
+                {marqueeText}
+              </div>
+            </div>
+          )}
           {searchQuery && (
             <button 
               type="button" 
@@ -117,8 +135,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <CommandItem onSelect={() => {
               setSearchQuery("wedding venues");
               setIsModalOpen(false);
-              navigate("/search?q=wedding+venues&type=venues");
-              toast.success("Searching for wedding venues");
+              router.push("/search?q=wedding+venues&type=venues");
+              if (typeof window !== 'undefined') window.alert("Searching for wedding venues");
             }}>
               <Map className="mr-2 h-4 w-4" />
               <span>Wedding Venues</span>
@@ -126,8 +144,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <CommandItem onSelect={() => {
               setSearchQuery("wedding photographers");
               setIsModalOpen(false);
-              navigate("/search?q=wedding+photographers&type=vendors");
-              toast.success("Searching for wedding photographers");
+              router.push("/search?q=wedding+photographers&type=vendors");
+              if (typeof window !== 'undefined') window.alert("Searching for wedding photographers");
             }}>
               <Calendar className="mr-2 h-4 w-4" />
               <span>Wedding Photographers</span>
@@ -136,21 +154,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <CommandGroup heading="Search Options">
             <CommandItem onSelect={() => {
               setSearchType('venues');
-              toast.success("Now searching venues only");
+              if (typeof window !== 'undefined') window.alert("Now searching venues only");
             }}>
               <Map className="mr-2 h-4 w-4" />
               <span>Search Venues Only</span>
             </CommandItem>
             <CommandItem onSelect={() => {
               setSearchType('vendors');
-              toast.success("Now searching vendors only");
+              if (typeof window !== 'undefined') window.alert("Now searching vendors only");
             }}>
               <Calendar className="mr-2 h-4 w-4" />
               <span>Search Vendors Only</span>
             </CommandItem>
             <CommandItem onSelect={() => {
               setSearchType('all');
-              toast.success("Now searching everything");
+              if (typeof window !== 'undefined') window.alert("Now searching everything");
             }}>
               <Search className="mr-2 h-4 w-4" />
               <span>Search Everything</span>
@@ -158,6 +176,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+
+      {marqueeSuggestions.length > 0 && (
+        <style jsx>{`
+          @keyframes searchbar-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+
+          .marquee-track {
+            display: inline-block;
+            padding-left: 0.75rem;
+            animation: searchbar-marquee ${marqueeDuration}s linear infinite;
+            will-change: transform;
+          }
+        `}</style>
+      )}
     </>
   );
 };

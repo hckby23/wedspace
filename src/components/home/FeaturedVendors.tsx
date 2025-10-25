@@ -1,8 +1,10 @@
+"use client";
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 interface Vendor {
   id: string;
@@ -68,7 +70,7 @@ const FeaturedVendors: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {FEATURED_VENDORS.map((vendor) => (
-            <Link to={`/vendors/${vendor.id}`} key={vendor.id}>
+            <Link href={`/vendors/${vendor.id}`} key={vendor.id}>
               <Card className="overflow-hidden card-hover h-full">
                 <div className="relative h-48">
                   <img
@@ -96,7 +98,7 @@ const FeaturedVendors: React.FC = () => {
         </div>
         
         <div className="mt-10 text-center">
-          <Link to="/vendors">
+          <Link href="/vendors">
             <Button variant="outline" className="border-space text-space hover:bg-space/5">
               View All Vendors
             </Button>
@@ -108,6 +110,3 @@ const FeaturedVendors: React.FC = () => {
 };
 
 export default FeaturedVendors;
-
-// Import the Button component
-import { Button } from '@/components/ui/button';

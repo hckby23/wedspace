@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -52,7 +51,7 @@ const VendorFilters: React.FC<VendorFiltersProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border p-5 sticky top-24">
+    <div className="bg-[var(--bg-card)] rounded-lg border p-5 sticky top-24 text-[var(--text)]">
       <h3 className="font-playfair font-semibold text-xl mb-6">Filters</h3>
 
       <Accordion type="multiple" defaultValue={['location', 'category']} className="space-y-4">

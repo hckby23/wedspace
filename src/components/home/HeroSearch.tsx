@@ -1,6 +1,7 @@
+"use client";
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -23,7 +24,7 @@ import {
 import { Search, MapPin, Calendar, Users } from 'lucide-react';
 
 const HeroSearch: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("venues");
   
   // Venues search state
@@ -43,7 +44,7 @@ const HeroSearch: React.FC = () => {
     if (venueDate) params.append('date', venueDate);
     if (venueGuests) params.append('guests', venueGuests);
     
-    navigate(`/venues?${params.toString()}`);
+    router.push(`/venues?${params.toString()}`);
   };
 
   const handleVendorsSearch = (e: React.FormEvent) => {
@@ -53,11 +54,11 @@ const HeroSearch: React.FC = () => {
     if (vendorType) params.append('type', vendorType);
     if (vendorLocation) params.append('location', vendorLocation);
     
-    navigate(`/vendors?${params.toString()}`);
+    router.push(`/vendors?${params.toString()}`);
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-lg border-0">
+    <Card className="w-full max-w-4xl mx-auto bg-[var(--bg-card)] rounded-xl shadow-lg border-0 text-[var(--text)]">
       <CardContent className="p-1">
         <Tabs 
           defaultValue="venues" 
@@ -133,7 +134,7 @@ const HeroSearch: React.FC = () => {
                   className="text-wed hover:underline"
                   onClick={() => {
                     setVenueLocation("Los Angeles");
-                    navigate("/venues?location=Los+Angeles");
+                    router.push("/venues?location=Los+Angeles");
                   }}
                 >
                   Los Angeles
@@ -143,7 +144,7 @@ const HeroSearch: React.FC = () => {
                   className="text-wed hover:underline"
                   onClick={() => {
                     setVenueLocation("New York");
-                    navigate("/venues?location=New+York");
+                    router.push("/venues?location=New+York");
                   }}
                 >
                   New York
@@ -151,14 +152,14 @@ const HeroSearch: React.FC = () => {
                 <button 
                   type="button" 
                   className="text-wed hover:underline"
-                  onClick={() => navigate("/venues?type=garden")}
+                  onClick={() => router.push("/venues?type=garden")}
                 >
                   Garden Venues
                 </button>
                 <button 
                   type="button" 
                   className="text-wed hover:underline"
-                  onClick={() => navigate("/venues?type=beach")}
+                  onClick={() => router.push("/venues?type=beach")}
                 >
                   Beach Venues
                 </button>
@@ -214,7 +215,7 @@ const HeroSearch: React.FC = () => {
                   className="text-space hover:underline"
                   onClick={() => {
                     setVendorType("photographer");
-                    navigate("/vendors?type=photographer");
+                    router.push("/vendors?type=photographer");
                   }}
                 >
                   Photographers
@@ -224,7 +225,7 @@ const HeroSearch: React.FC = () => {
                   className="text-space hover:underline"
                   onClick={() => {
                     setVendorType("florist");
-                    navigate("/vendors?type=florist");
+                    router.push("/vendors?type=florist");
                   }}
                 >
                   Florists
@@ -234,7 +235,7 @@ const HeroSearch: React.FC = () => {
                   className="text-space hover:underline"
                   onClick={() => {
                     setVendorType("caterer");
-                    navigate("/vendors?type=caterer");
+                    router.push("/vendors?type=caterer");
                   }}
                 >
                   Caterers
@@ -244,7 +245,7 @@ const HeroSearch: React.FC = () => {
                   className="text-space hover:underline"
                   onClick={() => {
                     setVendorType("dj");
-                    navigate("/vendors?type=dj");
+                    router.push("/vendors?type=dj");
                   }}
                 >
                   DJs & Musicians

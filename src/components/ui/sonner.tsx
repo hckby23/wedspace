@@ -1,29 +1,26 @@
-import { useTheme } from "next-themes"
-import { Toaster as Sonner, toast } from "sonner"
+// Minimal shim to avoid the sonner dependency while keeping API compatibility
+// Consumers can still import { Toaster, toast } from this module.
 
-type ToasterProps = React.ComponentProps<typeof Sonner>
+type ToasterProps = Record<string, unknown>
 
-const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme()
+const Toaster = (_props: ToasterProps) => {
+  // No-op visual toaster; notifications are normalized to window.alert.
+  return null
+}
 
-  return (
-    <Sonner
-      theme={theme as ToasterProps["theme"]}
-      className="toaster group"
-      toastOptions={{
-        classNames: {
-          toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
-          description: "group-[.toast]:text-muted-foreground",
-          actionButton:
-            "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
-          cancelButton:
-            "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
-        },
-      }}
-      {...props}
-    />
-  )
+const toast = (message: string | { description?: string; title?: string }) => {
+  try {
+    if (typeof window !== 'undefined') {
+      if (typeof message === 'string') {
+        window.alert(message)
+      } else {
+        const text = [message.title, message.description]
+          .filter(Boolean)
+          .join(' — ')
+        window.alert(text)
+      }
+    }
+  } catch {}
 }
 
 export { Toaster, toast }

@@ -1,12 +1,13 @@
+"use client";
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Search, TrendingUp } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const PopularSearches: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const popularCategories = [
     { name: 'Garden Venues', query: 'garden wedding venue', count: 2453 },
@@ -32,7 +33,7 @@ const PopularSearches: React.FC = () => {
 
   const handleSearch = (query: string) => {
     // In a real app, this would use the search API
-    navigate(`/search?q=${encodeURIComponent(query)}`);
+    router.push(`/search?q=${encodeURIComponent(query)}`);
   };
 
   return (

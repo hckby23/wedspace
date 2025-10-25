@@ -32,6 +32,10 @@ export const NAV_LINKS = [
     ]
   },
   {
+    label: 'Dashboard',
+    href: '/dashboard'
+  },
+  {
     label: 'Favorites',
     href: '/favorites'
   },
@@ -47,6 +51,6 @@ export const NAV_LINKS = [
 
 export const MOBILE_NAV_LINKS = [
   ...NAV_LINKS,
-  { label: 'Login', href: '/login' },
-  { label: 'Sign Up', href: '/signup' },
+  { label: 'Login', href: '/auth/login' },
+  { label: 'Sign Up', href: '/auth/signup' },
 ];

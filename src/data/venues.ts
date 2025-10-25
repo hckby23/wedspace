@@ -1,5 +1,43 @@
 // Venue data for use across the application
-export const FEATURED_VENUES = [
+
+export interface Venue {
+  id: string;
+  name: string;
+  location: string;
+  city?: string;
+  state?: string;
+  image: string;
+  rating: number;
+  priceRange: string;
+  price?: number;
+  description: string;
+  tags: string[];
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  contactInfo: {
+    phone: string;
+    email: string;
+    website: string;
+  };
+  capacity: {
+    min: number;
+    max: number;
+  };
+  amenities: string[];
+  reviews: Array<{
+    id: string;
+    author: string;
+    date: string;
+    rating: number;
+    content: string;
+  }>;
+  verified?: boolean;
+  status?: string;
+}
+
+export const FEATURED_VENUES: Venue[] = [
   {
     id: '1',
     name: 'The Grand New Delhi',
@@ -834,3 +872,47 @@ export const DELHI_NCR_VENDORS = [
     tags: ['Custom Invitations', 'Digital Invites', 'Luxury Cards', 'Packaging']
   }
 ];
+
+// Filter and search utilities
+export const filterVenuesByCity = (city: string) => {
+  if (city === 'all') return FEATURED_VENUES;
+  return FEATURED_VENUES.filter(v => 
+    v.location.toLowerCase().includes(city.toLowerCase()) ||
+    v.city?.toLowerCase() === city.toLowerCase()
+  );
+};
+
+export const filterVenuesByCapacity = (minCapacity: number, maxCapacity: number) => {
+  return FEATURED_VENUES.filter(v => 
+    v.capacity.max >= minCapacity && v.capacity.min <= maxCapacity
+  );
+};
+
+export const filterVenuesByRating = (minRating: number) => {
+  return FEATURED_VENUES.filter(v => v.rating >= minRating);
+};
+
+export const searchVenues = (query: string) => {
+  const lowerQuery = query.toLowerCase();
+  return FEATURED_VENUES.filter(v =>
+    v.name.toLowerCase().includes(lowerQuery) ||
+    v.description.toLowerCase().includes(lowerQuery) ||
+    v.location.toLowerCase().includes(lowerQuery) ||
+    v.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+  );
+};
+
+export const getVenueCities = () => {
+  const cities = FEATURED_VENUES.map(v => {
+    if (v.city) return v.city;
+    // Extract city from location string
+    const parts = v.location.split(',');
+    return parts[parts.length - 1].trim();
+  });
+  return Array.from(new Set(cities));
+};
+
+export const getVenueTags = () => {
+  const allTags = FEATURED_VENUES.flatMap(v => v.tags);
+  return Array.from(new Set(allTags));
+};

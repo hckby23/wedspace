@@ -1,6 +1,7 @@
+"use client";
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 const CTA: React.FC = () => {
@@ -16,10 +17,10 @@ const CTA: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button className="btn-primary" size="lg" asChild>
-              <Link to="/signup">Create Free Account</Link>
+              <Link href="/signup">Create Free Account</Link>
             </Button>
             <Button variant="outline" className="border-wed text-wed hover:bg-wed/5" size="lg" asChild>
-              <Link to="/venues">Browse Venues</Link>
+              <Link href="/venues">Browse Venues</Link>
             </Button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-
+/* stylelint-disable at-rule-no-unknown */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -37,6 +37,19 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.75rem;
+
+    --wed: #DC2626;
+    --space: #F59E0B;
+
+    --bg: #fff;
+    --bg-card: #f8fafc;
+    --text: #18181b;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --input-bg: #fff;
+    --input-text: #18181b;
+    --accent: #F59E0B;
+    --danger: #DC2626;
   }
 
   .dark {
@@ -67,6 +80,18 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --wed: #F59E0B;
+    --space: #DC2626;
+
+    --bg: #18181b;
+    --bg-card: #23232b;
+    --text: #f3f4f6;
+    --text-muted: #a1a1aa;
+    --input-bg: #23232b;
+    --input-text: #f3f4f6;
+    --accent: #FBBF24;
+    --danger: #F87171;
   }
 }
 
@@ -76,11 +101,29 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-sans;
+    background: var(--bg);
+    color: var(--text);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-serif;
+  }
+
+  .card, .bg-card {
+    background: var(--bg-card);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  input, select, textarea {
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--border);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
   }
 }
 
@@ -106,4 +149,12 @@
 
 .container-custom {
   @apply container mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.text-wed {
+  color: var(--wed) !important;
+}
+
+.text-space {
+  color: var(--space) !important;
 }

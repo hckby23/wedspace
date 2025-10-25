@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import { toast as sonnerToast } from "sonner";
 
 // Define proper types for toast
 export interface ToastProps {
@@ -14,11 +13,15 @@ export interface ToastProps {
 export type ToastActionElement = React.ReactElement;
 
 export function toast({ title, description, action, duration }: ToastProps) {
-  return sonnerToast(title as string, {
-    description,
-    action,
-    duration,
-  });
+  try {
+    if (typeof window !== 'undefined') {
+      const message = [title, description]
+        .filter(Boolean)
+        .map((v) => (typeof v === 'string' ? v : ''))
+        .join(' — ');
+      window.alert(message || '');
+    }
+  } catch {}
 }
 
 export const useToast = () => {

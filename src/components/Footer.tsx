@@ -1,8 +1,18 @@
 
+"use client";
+
 import React from 'react';
 import Logo from './Logo';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
+/**
+ * Footer Component
+ * 
+ * Main footer component for WedSpace with responsive design,
+ * navigation links, and dark mode compatibility.
+ */
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
@@ -14,6 +24,15 @@ const Footer: React.FC = () => {
         { name: 'Vendors', path: '/vendors' },
         { name: 'Real Weddings', path: '/real-weddings' },
         { name: 'Wedding Ideas', path: '/ideas' },
+      ],
+    },
+    {
+      title: 'Business Dashboards',
+      links: [
+        { name: 'Venue Dashboard', path: '/venue/dashboard' },
+        { name: 'Vendor Dashboard', path: '/vendor/dashboard' },
+        { name: 'Admin Dashboard', path: '/admin/dashboard' },
+        { name: 'Analytics', path: '/analytics' },
       ],
     },
     {
@@ -55,30 +74,45 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#0A1128] text-white pt-12 pb-6">
+    <footer className={cn(
+      "pt-12 pb-6 border-t",
+      "bg-muted/40 dark:bg-muted/20 text-foreground",
+      "transition-colors duration-300"
+    )}>
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 pb-8">
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <span className="font-playfair font-bold text-2xl">
-                <span className="text-wed">wed</span>
-                <span className="text-space">space</span>
-              </span>
+              <Logo />
             </div>
-            <p className="text-gray-300 mb-4">
+            <p className="text-muted-foreground mb-6">
               Your perfect wedding planning platform for venues, vendors, and tools.
             </p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Facebook">
+                <Facebook size={20} />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
+                <Instagram size={20} />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Twitter">
+                <Twitter size={20} />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="YouTube">
+                <Youtube size={20} />
+              </a>
+            </div>
           </div>
           
           {footerLinks.map((section, index) => (
             <div key={index}>
-              <h3 className="font-playfair font-semibold text-lg mb-4">{section.title}</h3>
+              <h3 className="font-medium text-lg mb-4">{section.title}</h3>
               <ul className="space-y-2">
                 {section.links.map((link, i) => (
                   <li key={i}>
                     <Link 
-                      to={link.path} 
-                      className="text-gray-300 hover:text-white transition-colors"
+                      href={link.path} 
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -89,14 +123,14 @@ const Footer: React.FC = () => {
           ))}
         </div>
         
-        <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {currentYear} <span className="text-wed">wed</span><span className="text-space">space</span>. All rights reserved.
+        <div className="border-t border-border pt-6 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-muted-foreground text-sm mb-4 md:mb-0">
+            © {currentYear} <span className="text-primary font-medium">wed</span><span className="text-secondary font-medium">space</span>. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <Link to="/terms" className="text-gray-400 text-sm hover:text-white">Terms</Link>
-            <Link to="/privacy" className="text-gray-400 text-sm hover:text-white">Privacy</Link>
-            <Link to="/cookies" className="text-gray-400 text-sm hover:text-white">Cookies</Link>
+            <Link href="/terms" className="text-muted-foreground text-sm hover:text-primary transition-colors">Terms</Link>
+            <Link href="/privacy" className="text-muted-foreground text-sm hover:text-primary transition-colors">Privacy</Link>
+            <Link href="/cookies" className="text-muted-foreground text-sm hover:text-primary transition-colors">Cookies</Link>
           </div>
         </div>
       </div>

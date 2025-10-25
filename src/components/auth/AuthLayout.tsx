@@ -1,7 +1,8 @@
+"use client";
 
 import React from 'react';
 import Logo from '../Logo';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -21,7 +22,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
       {/* Left side - Form */}
       <div className="w-full lg:w-1/2 flex flex-col p-6 sm:p-10 lg:p-16">
         <div className="mb-4">
-          <Link to="/">
+          <Link href="/">
             <span className="inline-block">
               <Logo />
             </span>
@@ -32,13 +33,13 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
         {(type.includes('login') || type.includes('signup')) && (
           <div className="flex justify-center mb-8 border-b border-gray-200">
             <Link 
-              to={type.includes('login') ? "/login" : "/signup"} 
+              href={type.includes('login') ? "/login" : "/signup"} 
               className={`px-4 py-2 ${!type.includes('vendor') && !type.includes('venue') ? 'border-b-2 border-red-500 font-medium text-red-500' : 'text-gray-500'}`}
             >
               Users
             </Link>
             <Link 
-              to={type.includes('login') ? "/vendor-venue/login" : "/vendor-venue/signup"} 
+              href={type.includes('login') ? "/vendor-venue/login" : "/vendor-venue/signup"} 
               className={`px-4 py-2 ${(type.includes('vendor') || type.includes('venue')) ? 'border-b-2 border-red-500 font-medium text-red-500' : 'text-gray-500'}`}
             >
               Vendors/Venues
@@ -56,7 +57,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {type === 'login' && (
               <p className="text-gray-600">
                 Don't have an account?{' '}
-                <Link to="/signup" className="text-red-500 hover:underline font-medium">
+                <Link href="/signup" className="text-red-500 hover:underline font-medium">
                   Sign Up
                 </Link>
               </p>
@@ -65,7 +66,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {type === 'signup' && (
               <p className="text-gray-600">
                 Already have an account?{' '}
-                <Link to="/login" className="text-red-500 hover:underline font-medium">
+                <Link href="/login" className="text-red-500 hover:underline font-medium">
                   Log In
                 </Link>
               </p>
@@ -74,7 +75,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {type === 'forgot-password' && (
               <p className="text-gray-600">
                 Remember your password?{' '}
-                <Link to="/login" className="text-red-500 hover:underline font-medium">
+                <Link href="/login" className="text-red-500 hover:underline font-medium">
                   Log In
                 </Link>
               </p>
@@ -83,7 +84,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {type === 'vendor-login' && (
               <p className="text-gray-600">
                 Not a vendor yet?{' '}
-                <Link to="/vendor/signup" className="text-red-500 hover:underline font-medium">
+                <Link href="/vendor/signup" className="text-red-500 hover:underline font-medium">
                   Join as Vendor
                 </Link>
               </p>
@@ -92,7 +93,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {type === 'vendor-signup' && (
               <p className="text-gray-600">
                 Already a vendor?{' '}
-                <Link to="/vendor/login" className="text-red-500 hover:underline font-medium">
+                <Link href="/vendor/login" className="text-red-500 hover:underline font-medium">
                   Log In
                 </Link>
               </p>
@@ -101,7 +102,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {type === 'venue-login' && (
               <p className="text-gray-600">
                 Not registered as a venue?{' '}
-                <Link to="/venue/signup" className="text-red-500 hover:underline font-medium">
+                <Link href="/venue/signup" className="text-red-500 hover:underline font-medium">
                   Register as Venue
                 </Link>
               </p>
@@ -110,7 +111,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {type === 'venue-signup' && (
               <p className="text-gray-600">
                 Already registered?{' '}
-                <Link to="/venue/login" className="text-red-500 hover:underline font-medium">
+                <Link href="/venue/login" className="text-red-500 hover:underline font-medium">
                   Log In
                 </Link>
               </p>
